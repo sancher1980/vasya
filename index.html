@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вася — достану технику, которой нет в магазинах</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--yellow:#ffdd00;--red:#e60000;--dark:#0c0c0c;--card:#181818;--green:#25d366}
+    body{font-family:'Montserrat',system-ui,Arial,sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
+    h1,h2,h3,.display{font-family:'Russo One','Arial Black',Arial,sans-serif;font-weight:400;text-transform:uppercase}
+    a{color:inherit;text-decoration:none}
+
+    .ticker{overflow:hidden;background:var(--yellow);color:#000;border-bottom:3px solid #000;white-space:nowrap}
+    .ticker .track{display:inline-block;padding:10px 0;animation:scroll 24s linear infinite}
+    .ticker span{font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:20px;letter-spacing:1px;padding:0 12px}
+    .ticker span b{color:var(--red)}
+    .ticker .dot{color:#000}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid #222;flex-wrap:wrap}
+    .brand{font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:22px;text-transform:uppercase}
+    .brand b{color:var(--yellow)}
+    .nav .nav-phone{font-weight:900;font-size:18px}
+    .nav .nav-phone span{color:var(--yellow)}
+
+    .hero{padding:54px 20px 70px;text-align:center;position:relative;overflow:hidden;
+      background:radial-gradient(ellipse at 50% 0%,#2a2a2a 0%,var(--dark) 70%)}
+    .hero .burst{position:absolute;inset:0;pointer-events:none;opacity:.14;background:
+      radial-gradient(circle at 20% 20%,var(--yellow) 0,transparent 22%),
+      radial-gradient(circle at 80% 15%,var(--red) 0,transparent 20%),
+      radial-gradient(circle at 70% 85%,var(--yellow) 0,transparent 22%),
+      radial-gradient(circle at 12% 75%,var(--red) 0,transparent 18%)}
+    .hero .inner{position:relative;z-index:1;max-width:920px;margin:0 auto}
+    .hero h1{font-size:clamp(34px,9vw,84px);line-height:1;text-shadow:4px 4px 0 rgba(0,0,0,.3)}
+    .hero h1 .yellow{color:var(--yellow)}
+    .hero h1 .red{color:var(--red)}
+    .hero .sub{max-width:640px;margin:26px auto 0;font-size:18px;line-height:1.6;font-weight:700}
+    .hero .sub b{color:var(--yellow)}
+    .hero .scale{display:inline-block;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:clamp(15px,3vw,22px);background:#000;color:#fff;border:2px solid var(--yellow);padding:10px 22px;border-radius:10px;transform:rotate(-1.5deg)}
+    .hero .scale b{color:var(--yellow)}
+
+    .illu{margin:36px auto 0;max-width:560px}
+    .illu svg{width:100%;height:auto;display:block}
+
+    .badges{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:34px}
+    .badge{background:var(--yellow);color:#000;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:17px;padding:10px 20px;box-shadow:5px 5px 0 var(--red);transform:rotate(-2deg)}
+    .badge.red{background:var(--red);color:#fff;box-shadow:5px 5px 0 var(--yellow);transform:rotate(2deg)}
+    .badge small{display:block;font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:11px}
+    .button-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;gap:10px;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:20px;padding:16px 34px;border-radius:10px;transition:transform .12s}
+    .btn:hover{transform:translateY(-3px)}
+    .btn-call{background:var(--red);color:#fff;box-shadow:0 6px 0 #a30000}
+    .btn-wa{background:var(--green);color:#fff;box-shadow:0 6px 0 #128c46}
+    .hero .note{margin-top:20px;font-size:13px;color:#999}
+
+    section{padding:70px 20px;max-width:900px;margin:0 auto}
+    .section-title{text-align:center;margin-bottom:12px}
+    .section-title .kicker{display:inline-block;font-weight:900;font-size:12px;letter-spacing:2px;color:var(--yellow);border:2px solid var(--yellow);padding:4px 12px;border-radius:20px;margin-bottom:16px}
+    .section-title h2{font-size:clamp(26px,5vw,44px);line-height:1.05}
+    .section-title h2 b{color:var(--yellow)}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:36px}
+    .card{background:var(--card);border:2px solid #2a2a2a;border-radius:14px;padding:26px 20px;text-align:center;transition:border-color .2s,transform .2s}
+    .card:hover{border-color:var(--yellow);transform:translateY(-4px)}
+    .card .em{font-size:46px;margin-bottom:10px}
+    .card h3{font-size:19px;color:var(--yellow);margin-bottom:10px}
+    .card p{font-size:14px;line-height:1.55;color:#aaa}
+
+    .why-item{display:flex;gap:16px;align-items:flex-start;background:var(--card);border-radius:12px;padding:20px 22px;margin-bottom:14px}
+    .why-item .n{flex:0 0 auto;width:40px;height:40px;background:var(--yellow);color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:20px;transform:rotate(-6deg)}
+    .why-item:nth-child(even) .n{background:var(--red);color:#fff;transform:rotate(6deg)}
+    .why-item p{font-size:16px;line-height:1.6;color:#ccc}
+    .why-item p b{color:#fff}
+
+    .outro{background:linear-gradient(135deg,var(--red),#8a0000);text-align:center;padding:66px 20px;margin-top:10px}    .outro h2{font-size:clamp(28px,6vw,50px);color:#fff;margin-bottom:14px;text-shadow:3px 3px 0 rgba(0,0,0,.25)}
+    .outro p{font-size:17px;color:rgba(255,255,255,.85);margin-bottom:28px}
+    .outro .phone-big{display:inline-block;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:clamp(26px,6vw,44px);color:#000;background:var(--yellow);padding:14px 30px;border-radius:12px;box-shadow:6px 6px 0 #000}
+
+    footer{padding:28px;text-align:center;font-size:12px;color:#555;line-height:1.7}
+    .disc{margin-top:8px;color:#3a3a3a;font-size:11px}
+
+    /* акции */
+    .deal{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#1e1e1e,#151515);border:2px solid #2a2a2a;border-left:6px solid var(--yellow);border-radius:14px;padding:20px 22px;margin-bottom:14px;transition:border-color .2s,transform .2s}
+    .deal:hover{border-left-color:var(--red);transform:translateX(6px)}
+    .deal:nth-child(even){border-left-color:var(--red)}
+    .deal:nth-child(even):hover{border-left-color:var(--yellow)}
+    .deal .deal-ico{flex:0 0 auto;width:58px;height:58px;background:#000;border:2px solid var(--yellow);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px}
+    .deal .deal-txt b{display:block;font-family:'Russo One','Arial Black',Arial,sans-serif;font-size:clamp(16px,3vw,21px);color:var(--yellow);margin-bottom:6px;text-transform:uppercase}
+    .deal:nth-child(even) .deal-txt b{color:#fff}
+    .deal .deal-txt span{display:block;font-size:15px;line-height:1.6;color:#bbb}
+    .deals-note{text-align:center;margin-top:24px;font-size:16px;font-weight:700;color:#ddd}
+    .deals-note b{color:var(--yellow)}
+  </style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>ДОСТАНУ ЧТО УГОДНО — <b>БРЕНДОВОЕ</b></span><span class="dot">•</span>
+    <span>ОТ СКОВОРОДКИ ДО ТРАКТОРА — <b>ДОСТАНУ ВСЁ</b></span><span class="dot">•</span>
+    <span>ВСЁ, ЧЕГО НЕТ В МАГАЗИНАХ — <b>ЕСТЬ У МЕНЯ</b></span><span class="dot">•</span>
+    <span>ЦЕНЫ ДЕМОКРАТИЧНЫЕ — <b>БЕЗ НАЦЕНОК</b></span><span class="dot">•</span>
+    <span>ПРИВЕЗУ САМ — <b>ИЗ МОСКВЫ</b></span><span class="dot">•</span>
+    <span>ДОСТАНУ ЧТО УГОДНО — <b>БРЕНДОВОЕ</b></span><span class="dot">•</span>
+    <span>ОТ СКОВОРОДКИ ДО ТРАКТОРА — <b>ДОСТАНУ ВСЁ</b></span><span class="dot">•</span>
+    <span>ВСЁ, ЧЕГО НЕТ В МАГАЗИНАХ — <b>ЕСТЬ У МЕНЯ</b></span><span class="dot">•</span>
+    <span>ЦЕНЫ ДЕМОКРАТИЧНЫЕ — <b>БЕЗ НАЦЕНОК</b></span><span class="dot">•</span>
+    <span>ПРИВЕЗУ САМ — <b>ИЗ МОСКВЫ</b></span><span class="dot">•</span>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="brand">ВАСЯ <b>ДОСТАНЕТ</b></div>
+  <a class="nav-phone" href="tel:+79639728869">📞 <span>+7 963 972-88-69</span></a>
+</div>
+
+<header class="hero">
+  <div class="burst"></div>
+  <div class="inner">
+    <h1>
+      <span class="yellow">ДОСТАНУ</span><br>
+      <span class="red">ЧТО УГОДНО</span>
+    </h1>
+    <p class="sub">Брендовую технику, которой <b>нет в магазинах</b>. Цены — демократичные. Возят другие — достаю я.</p>
+    <p class="sub" style="margin-top:12px;font-size:15px;color:#bbb;font-weight:700">📱 Телефоны · 💻 Ноутбуки · 🎧 Гаджеты · 🏠 Техника для дома</p>
+    <p class="scale" style="margin-top:22px">ОТ <b>СКОВОРОДКИ</b> ДО <b>ТРАКТОРА</b> — ДОСТАНУ ВСЁ!</p>
+
+    <div class="illu">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Иллюстрация: чемодан с техникой и надпись «достану что угодно»">
+        <defs>
+          <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2b2b2b"/><stop offset="1" stop-color="#141414"/>
+          </linearGradient>
+          <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4fc3f7"/><stop offset="1" stop-color="#1565c0"/>
+          </linearGradient>
+        </defs>
+
+        <ellipse cx="320" cy="330" rx="230" ry="18" fill="#000" opacity=".35"/>
+
+        <!-- чемодан -->
+        <rect x="150" y="120" width="340" height="200" rx="18" fill="url(#caseGrad)" stroke="#ffdd00" stroke-width="3"/>
+        <rect x="150" y="120" width="340" height="34" rx="12" fill="#ffdd00"/>
+        <rect x="285" y="96" width="70" height="30" rx="12" fill="none" stroke="#ffdd00" stroke-width="7"/>
+        <!-- защёлки -->
+        <rect x="235" y="118" width="34" height="16" rx="4" fill="#c0c0c0"/>
+        <rect x="371" y="118" width="34" height="16" rx="4" fill="#c0c0c0"/>
+        <!-- из чемодана торчит техника -->
+        <!-- ноутбук -->
+        <g transform="translate(190,150)">
+          <rect x="0" y="0" width="104" height="70" rx="6" fill="#333" stroke="#666" stroke-width="2"/>
+          <rect x="7" y="7" width="90" height="56" rx="3" fill="url(#screenGrad)"/>
+          <rect x="-6" y="70" width="116" height="10" rx="4" fill="#444"/>
+        </g>
+        <!-- телефон -->
+        <g transform="translate(322,158)">
+          <rect x="0" y="0" width="42" height="74" rx="8" fill="#222" stroke="#666" stroke-width="2"/>
+          <rect x="4" y="8" width="34" height="58" rx="4" fill="#e60000"/>
+          <circle cx="21" cy="6" r="2.5" fill="#666"/>
+        </g>
+        <!-- наушники -->
+        <g transform="translate(392,150)">
+          <path d="M6 46 Q6 8 44 8 Q82 8 82 46" fill="none" stroke="#ffdd00" stroke-width="8" stroke-linecap="round"/>
+          <rect x="-2" y="42" width="18" height="30" rx="8" fill="#ffdd00"/>
+          <rect x="72" y="42" width="18" height="30" rx="8" fill="#ffdd00"/>
+        </g>
+        <!-- часы -->
+        <g transform="translate(470,196)">
+          <rect x="0" y="0" width="30" height="38" rx="7" fill="#222" stroke="#666" stroke-width="2"/>
+          <rect x="4" y="6" width="22" height="26" rx="4" fill="#25d366"/>
+          <rect x="9" y="-10" width="12" height="12" rx="3" fill="#444"/>
+          <rect x="9" y="36" width="12" height="12" rx="3" fill="#444"/>
+        </g>
+
+        <!-- искры -->
+        <g fill="#ffdd00">
+          <path d="M120 96 l6 18 18 6 -18 6 -6 18 -6 -18 -18 -6 18 -6 Z"/>
+          <path d="M520 92 l6 18 18 6 -18 6 -6 18 -6 -18 -18 -6 18 -6 Z"/>
+        </g>
+        <!-- ценник -->
+        <g transform="translate(438,270) rotate(-8)">
+          <rect x="0" y="0" width="120" height="42" rx="6" fill="#ffdd00" stroke="#111" stroke-width="2"/>
+          <text x="60" y="19" font-family="Montserrat,Arial" font-weight="900" font-size="13" fill="#111" text-anchor="middle">ЦЕНЫ —</text>
+          <text x="60" y="35" font-family="Montserrat,Arial" font-weight="900" font-size="13" fill="#e60000" text-anchor="middle">ДЕМОКРАТИЧНЫЕ</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="badges">
+      <div class="badge">ЦЕНЫ ДЕМОКРАТИЧНЫЕ<small>без магазинных наценок</small></div>
+      <div class="badge red">ПРИВЕЗУ ПОД ЗАКАЗ<small>то, чего в магазинах нет</small></div>
+    </div>
+    <div class="button-row">
+      <a class="btn btn-call" href="tel:+79639728869">📞 +7 963 972-88-69</a>
+      <a class="btn btn-wa" href="https://wa.me/79639728869" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+    <p class="note">Напишите, что нужно — достану и привезу.</p>
+  </div>
+</header>
+
+<section>
+  <div class="section-title">
+    <span class="kicker">ЧТО ДОСТАЮ</span>
+    <h2>ВСЁ, ЧЕГО <b>НЕТ В МАГАЗИНАХ</b></h2>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="em">📱</div>
+      <h3>Смартфоны</h3>
+      <p>iPhone, Samsung, Xiaomi и другие бренды. Свежие модели — раньше, чем в витринах.</p>
+    </div>
+    <div class="card">
+      <div class="em">💻</div>
+      <h3>Ноутбуки</h3>
+      <p>MacBook, игровые и рабочие машины. Привезу ровно ту конфигурацию, что нужна.</p>
+    </div>
+    <div class="card">
+      <div class="em">🎧</div>
+      <h3>Гаджеты</h3>
+      <p>Наушники, часы, планшеты, аксессуары. Всё брендовое, всё оригинал.</p>
+    </div>
+    <div class="card">
+      <div class="em">🏠</div>
+      <h3>Техника для дома</h3>
+      <p>От кофемашины до робота-пылесоса. То, что «временно закончилось» в магазинах.</p>
+    </div>
+    <div class="card">
+      <div class="em">🍳</div>
+      <h3>Посуда и сковородки</h3>
+      <p>Да, и сковородки тоже. Достану то, о чём вы даже не думали спрашивать.</p>
+    </div>
+    <div class="card">
+      <div class="em">🚜</div>
+      <h3>Даже трактор</h3>
+      <p>Серьёзно. От сковородки до трактора — если оно существует, я это достану.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <span class="kicker">ПОЧЕМУ ВАСЯ</span>
+    <h2>АРГУМЕНТЫ <b>ЖЕЛЕЗНЫЕ</b></h2>
+  </div>
+  <div class="why-item"><div class="n">1</div><p><b>Достану то, чего нет.</b> Магазины говорят «нет в наличии» — Вася говорит «когда нужен».</p></div>
+  <div class="why-item"><div class="n">2</div><p><b>Цены демократичные.</b> Потому что между вами и брендом — только Вася, без посредников и наценок.</p></div>
+  <div class="why-item"><div class="n">3</div><p><b>Всё брендовое.</b> Никаких «почти как оригинал». Только оригинал — и точка.</p></div>
+  <div class="why-item"><div class="n">4</div><p><b>Привезу под заказ.</b> Скажите, что нужно — достану, привезу и отдам из рук в руки.</p></div>
+</section>
+
+<section>
+  <div class="section-title">
+    <span class="kicker">АКЦИИ ОТ ВАСИ</span>
+    <h2>ПРЕДЛОЖЕНИЯ, <b>ОТ КОТОРЫХ НЕ ОТКАЖЕШЬСЯ</b></h2>
+  </div>
+  <div class="deal">
+    <div class="deal-ico">📺</div>
+    <div class="deal-txt">
+      <b>Телевизор 60 дюймов за 5 000 ₽?</b>
+      <span>Позвони мне — и уже сегодня он будет украшать твой дом. Да, серьёзно. Нет, не шутка.</span>
+    </div>
+  </div>
+  <div class="deal">
+    <div class="deal-ico">🎁</div>
+    <div class="deal-txt">
+      <b>Телевизор — а чайник в подарок!</b>
+      <span>Берёшь телик — электрический чайник едет к тебе бесплатно. Чай попьёшь под сериальчик.</span>
+    </div>
+  </div>
+  <div class="deal">
+    <div class="deal-ico">👵</div>
+    <div class="deal-txt">
+      <b>Пенсионерам — скидки!</b>
+      <span>Пришли с бабушкой или дедушкой — и цена станет ещё демократичнее. Уважаем старших.</span>
+    </div>
+  </div>
+  <div class="deal">
+    <div class="deal-ico">🚚</div>
+    <div class="deal-txt">
+      <b>Привезу и подключу сам</b>
+      <span>Достал, привёз, поставил, включил. Тебе остаётся только пульт в руки взять.</span>
+    </div>
+  </div>
+  <p class="deals-note">Хочешь так же? Звони — договоримся. Цены и подарки обсуждаются лично.</p>
+</section>
+
+<section class="outro">
+  <h2>НУЖНА ТЕХНИКА — ЗВОНИ ВАСЕ</h2>
+  <p>Что достать, когда и за сколько — обсудим по телефону.</p>
+  <a class="phone-big" href="tel:+79639728869">📞 +7 963 972-88-69</a>
+  <br><br>
+  <a class="btn btn-wa" href="https://wa.me/79639728869" target="_blank" rel="noopener">💬 Написать в WhatsApp</a>
+</section>
+
+<footer>
+  © Вася · достану что угодно<br>
+  Брендовая техника под заказ · цены демократичные<br>
+  📞 +7 963 972-88-69<br>
+  <span class="disc">Сайт носит информационный характер и не является публичной офертой.</span>
+</footer>
+
+</body>
+</html>
